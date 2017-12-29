@@ -112,8 +112,7 @@ static const int DBDefaultColumsCount = 3;
  */
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *arr = [NSArray arrayWithArray:self.attrsArray];
-    return arr;
+    return self.attrsArray;
 }
 
 /**
