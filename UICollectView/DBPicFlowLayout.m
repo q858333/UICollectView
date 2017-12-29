@@ -54,7 +54,6 @@ static const int DBDefaultColumsCount = 3;
 - (CGSize)collectionViewContentSize
 {
 
-//    NSMutableArray *array = @[@"1",@"2",@"3",@"4",@"5"].mutableCopy;
 
     CGFloat maxValue = [[self.columnMaxYs valueForKeyPath:@"@max.floatValue"] floatValue];
 
@@ -65,40 +64,56 @@ static const int DBDefaultColumsCount = 3;
 - (void)prepareLayout
 {
     [super prepareLayout];
-
+    [self method1];
+    return;
     // 重置每一列的最大Y值
-    [self.columnMaxYs removeAllObjects];
-    for (NSUInteger i = 0; i<DBDefaultColumsCount; i++) {
-        [self.columnMaxYs addObject:@(DBDefaultInsets.top)];
+    if (self.columnMaxYs.count == 0) {
+        for (NSUInteger i = 0; i<DBDefaultColumsCount; i++) {
+            [self.columnMaxYs addObject:@(DBDefaultInsets.top)];
+        }
     }
 
+
     // 计算所有cell的布局属性
-    [self.attrsArray removeAllObjects];
-//    if (self.attrsArray.count == 0) {
-        NSUInteger cellCount = [self.collectionView numberOfItemsInSection:0];
-        for (NSUInteger i = 0; i < cellCount; ++i) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+
+        int count = self.attrsArray.count;
+        for (NSUInteger i = 0; i < 10; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count+i inSection:0];
             UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:indexPath];
             [self.attrsArray addObject:attrs];
         }
-//    }else{
-//        int count = self.attrsArray.count;
-//        for (NSUInteger i = 0; i < 10; i++) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count+i inSection:0];
-//            UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:indexPath];
-//            [self.attrsArray addObject:attrs];
-//        }
 
-//    }
 
 }
+
+
+- (void)method1{
+        [self.columnMaxYs removeAllObjects];
+        for (NSUInteger i = 0; i<DBDefaultColumsCount; i++) {
+            [self.columnMaxYs addObject:@(DBDefaultInsets.top)];
+        }
+    
+
+
+    // 计算所有cell的布局属性
+    [self.attrsArray removeAllObjects];
+    NSUInteger cellCount = [self.collectionView numberOfItemsInSection:0];
+    for (NSUInteger i = 0; i < cellCount; ++i) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:indexPath];
+        [self.attrsArray addObject:attrs];
+    }
+}
+
+
 
 /**
  * 说明所有元素（比如cell、补充控件、装饰控件）的布局属性
  */
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return self.attrsArray;
+    NSArray *arr = [NSArray arrayWithArray:self.attrsArray];
+    return arr;
 }
 
 /**
@@ -114,7 +129,6 @@ static const int DBDefaultColumsCount = 3;
     CGFloat xMargin = DBDefaultInsets.left + DBDefaultInsets.right + (DBDefaultColumsCount - 1) * DBDefaultColumnMargin;
     // cell的宽度
     CGFloat w = (JPCollectionW - xMargin) / DBDefaultColumsCount;
-    // cell的高度，测试数据，随机数
 
 
     CGFloat h = [self.cellHeights[indexPath.row] floatValue];
@@ -132,6 +146,10 @@ static const int DBDefaultColumsCount = 3;
             destColumn = i;
         }
     }
+
+
+
+
 
     // cell的x值
     CGFloat x = DBDefaultInsets.left + destColumn * (w + DBDefaultColumnMargin);
