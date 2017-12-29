@@ -7,9 +7,13 @@
 //
 
 #import "DBViewController.h"
-
-@interface DBViewController ()
-
+#import "DBPicCell.h"
+#import "DBPicFlowLayout.h"
+@interface DBViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+{
+    NSMutableArray *_heights;
+    UICollectionView *_collectionView;
+}
 @end
 
 @implementation DBViewController
@@ -17,16 +21,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+
+    _heights = [NSMutableArray array];
+
+    for (int i =0; i<10; i++) {
+        [_heights addObject:@(50 + arc4random_uniform(150))];
+    }
     
-    
-    UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
+    DBPicFlowLayout *flowLayout=[[DBPicFlowLayout alloc] init];
+    flowLayout.cellHeights = _heights;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    UICollectionView *collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)collectionViewLayout:flowLayout];
-    collectionView.delegate=self;
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionCell"];
-    collectionView.dataSource=self;
+
+
+    _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 320, 480) collectionViewLayout:flowLayout];
+    _collectionView.delegate=self;
+    [_collectionView registerClass:[DBPicCell class] forCellWithReuseIdentifier:@"CollectionCell"];
+    _collectionView.dataSource=self;
     
-    [self.view addSubview:collectionView];
+    [self.view addSubview:_collectionView];
    // char a[10]=
     NSString *str=@"sadasd123";
 
@@ -46,6 +59,18 @@
     {
         
     }
+
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitle:@"添加" forState:0];
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    btn.frame =CGRectMake(0, CGRectGetMaxY(_collectionView.frame), 100, 40);
+    [self.view addSubview:btn];
+
+
+
+
+
 }
 void KL (char *inStr)
 {
@@ -56,6 +81,15 @@ void KL (char *inStr)
         printf("%c",inStr[i]);
     }
 }
+- (void)btnClick{
+
+
+    for (int i =0; i<10; i++) {
+        [_heights addObject:@(50 + arc4random_uniform(150))];
+    }
+    [_collectionView reloadData];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -64,7 +98,7 @@ void KL (char *inStr)
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 10;
+    return _heights.count;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -74,30 +108,28 @@ void KL (char *inStr)
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * CellIdentifier = @"CollectionCell";
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    UILabel *lab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 50)];
-    lab.text=@"1111";
-    [cell addSubview:lab];
-    cell.backgroundColor = [UIColor colorWithRed:((10 * indexPath.row) / 255.0) green:((20 * indexPath.row)/255.0) blue:((30 * indexPath.row)/255.0) alpha:1.0f];
+    DBPicCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithRed:(  255.0) green:((20 * indexPath.row)/255.0) blue:((30 * indexPath.row)/255.0) alpha:1.0f];
+    cell.titleLabel.text = [NSString stringWithFormat:@"%d",indexPath.row];
     
     return cell;
 }
 #pragma mark --UICollectionViewDelegateFlowLayout
 //定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(96, 100);
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(96, 100);
+//}
 //设置顶部的大小
 //-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 //    CGSize size={50,50};
 //    return size;
 //}
 //定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(5, 5, 5, 5);
-}
+//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(5, 5, 5, 5);
+//}
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"%@",indexPath);

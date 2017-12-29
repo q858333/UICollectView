@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F788F0091FF61DC900E6A043 /* DBPicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F788F0071FF61DC900E6A043 /* DBPicCell.m */; };
+		F788F00C1FF61F3500E6A043 /* DBPicFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F788F00B1FF61F3500E6A043 /* DBPicFlowLayout.m */; };
 		F7CAAF7219B6BBBC008E6F34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAAF7119B6BBBC008E6F34 /* Foundation.framework */; };
 		F7CAAF7419B6BBBC008E6F34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAAF7319B6BBBC008E6F34 /* CoreGraphics.framework */; };
 		F7CAAF7619B6BBBC008E6F34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAAF7519B6BBBC008E6F34 /* UIKit.framework */; };
@@ -34,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F788F0071FF61DC900E6A043 /* DBPicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPicCell.m; sourceTree = "<group>"; };
+		F788F0081FF61DC900E6A043 /* DBPicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPicCell.h; sourceTree = "<group>"; };
+		F788F00A1FF61F3500E6A043 /* DBPicFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBPicFlowLayout.h; sourceTree = "<group>"; };
+		F788F00B1FF61F3500E6A043 /* DBPicFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBPicFlowLayout.m; sourceTree = "<group>"; };
 		F7CAAF6E19B6BBBC008E6F34 /* UICollectView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UICollectView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7CAAF7119B6BBBC008E6F34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F7CAAF7319B6BBBC008E6F34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +123,10 @@
 				F7CAAF8319B6BBBC008E6F34 /* Main.storyboard */,
 				F7CAAF8619B6BBBC008E6F34 /* DBViewController.h */,
 				F7CAAF8719B6BBBC008E6F34 /* DBViewController.m */,
+				F788F0081FF61DC900E6A043 /* DBPicCell.h */,
+				F788F0071FF61DC900E6A043 /* DBPicCell.m */,
+				F788F00A1FF61F3500E6A043 /* DBPicFlowLayout.h */,
+				F788F00B1FF61F3500E6A043 /* DBPicFlowLayout.m */,
 				F7CAAF8919B6BBBC008E6F34 /* Images.xcassets */,
 				F7CAAF7819B6BBBC008E6F34 /* Supporting Files */,
 			);
@@ -250,7 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F788F0091FF61DC900E6A043 /* DBPicCell.m in Sources */,
 				F7CAAF8219B6BBBC008E6F34 /* DBAppDelegate.m in Sources */,
+				F788F00C1FF61F3500E6A043 /* DBPicFlowLayout.m in Sources */,
 				F7CAAF8819B6BBBC008E6F34 /* DBViewController.m in Sources */,
 				F7CAAF7E19B6BBBC008E6F34 /* main.m in Sources */,
 			);
@@ -457,6 +469,7 @@
 				F7CAAFA219B6BBBC008E6F34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7CAAFA319B6BBBC008E6F34 /* Build configuration list for PBXNativeTarget "UICollectViewTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +478,7 @@
 				F7CAAFA519B6BBBC008E6F34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
