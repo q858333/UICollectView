@@ -8,7 +8,7 @@
 
 #import "DBPicFlowLayout.h"
 
-#define JPCollectionW self.collectionView.frame.size.width
+#define DBCollectionW self.collectionView.frame.size.width
 
 /** 每一行之间的间距 */
 static const CGFloat DBDefaultRowMargin = 10;
@@ -29,6 +29,7 @@ static const int DBDefaultColumsCount = 3;
 @end
 
 @implementation DBPicFlowLayout
+
 #pragma mark - 懒加载
 - (NSMutableArray *)columnMaxYs
 {
@@ -54,7 +55,6 @@ static const int DBDefaultColumsCount = 3;
 - (CGSize)collectionViewContentSize
 {
 
-
     CGFloat maxValue = [[self.columnMaxYs valueForKeyPath:@"@max.floatValue"] floatValue];
 
     return CGSizeMake(0, maxValue + DBDefaultInsets.bottom);
@@ -75,25 +75,23 @@ static const int DBDefaultColumsCount = 3;
 
 
     // 计算所有cell的布局属性
-
-        int count = self.attrsArray.count;
-        for (NSUInteger i = 0; i < 10; i++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count+i inSection:0];
-            UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:indexPath];
-            [self.attrsArray addObject:attrs];
-        }
+    int count = self.attrsArray.count;
+    for (NSUInteger i = 0; i < 10; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count+i inSection:0];
+        UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:indexPath];
+        [self.attrsArray addObject:attrs];
+    }
 
 
 }
 
 
 - (void)method1{
-        [self.columnMaxYs removeAllObjects];
-        for (NSUInteger i = 0; i<DBDefaultColumsCount; i++) {
-            [self.columnMaxYs addObject:@(DBDefaultInsets.top)];
-        }
-    
 
+    [self.columnMaxYs removeAllObjects];
+    for (NSUInteger i = 0; i<DBDefaultColumsCount; i++) {
+        [self.columnMaxYs addObject:@(DBDefaultInsets.top)];
+    }
 
     // 计算所有cell的布局属性
     [self.attrsArray removeAllObjects];
@@ -127,7 +125,7 @@ static const int DBDefaultColumsCount = 3;
     // 水平方向上的总间距
     CGFloat xMargin = DBDefaultInsets.left + DBDefaultInsets.right + (DBDefaultColumsCount - 1) * DBDefaultColumnMargin;
     // cell的宽度
-    CGFloat w = (JPCollectionW - xMargin) / DBDefaultColumsCount;
+    CGFloat w = (DBCollectionW - xMargin) / DBDefaultColumsCount;
 
 
     CGFloat h = [self.cellHeights[indexPath.row] floatValue];
