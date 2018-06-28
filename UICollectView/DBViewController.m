@@ -22,6 +22,7 @@
 {
     [super viewDidLoad];
 
+    NSLog(@"dengdengdengdengdengdeng");
 
     _heights = [NSMutableArray array];
 
